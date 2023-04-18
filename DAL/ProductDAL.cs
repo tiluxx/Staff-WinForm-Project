@@ -57,8 +57,8 @@ namespace DAL
 
         public void UpdateProductQuery()
         {
-            string query = "update Product set '" +
-                "ProductName = '" + productDTO.GetProjectName +
+            string query = "update Product set" +
+                " ProductName = '" + productDTO.GetProjectName +
                 "', ProductSize = '" + productDTO.GetProductSize +
                 "', ProductUnitSize = '" + productDTO.GetProductUnitSize +
                 "', ProductBrand = '" + productDTO.GetProductBrand +
