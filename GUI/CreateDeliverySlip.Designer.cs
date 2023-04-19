@@ -29,9 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TotalBilltxt = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.OrderIDtxt = new System.Windows.Forms.TextBox();
+            this.DeliveryDatetxt = new System.Windows.Forms.TextBox();
+            this.SlipIDtxt = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.CreateDeliverySlipBtn = new System.Windows.Forms.Button();
@@ -44,64 +48,106 @@
             this.actionToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.actionToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.ProductPriceNumInput = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TotalBilltxt)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DeliverySlipGRD)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ProductPriceNumInput)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.ProductPriceNumInput);
+            this.groupBox1.Controls.Add(this.TotalBilltxt);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.OrderIDtxt);
+            this.groupBox1.Controls.Add(this.DeliveryDatetxt);
+            this.groupBox1.Controls.Add(this.SlipIDtxt);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(5, 25);
+            this.groupBox1.Location = new System.Drawing.Point(5, 27);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(788, 79);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "De;iverySlip Information";
+            this.groupBox1.Text = "DeliverySlip Information";
             // 
-            // textBox4
+            // label5
             // 
-            this.textBox4.Location = new System.Drawing.Point(92, 47);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(243, 20);
-            this.textBox4.TabIndex = 4;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(365, 50);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "TotalBill";
             // 
-            // textBox2
+            // TotalBilltxt
             // 
-            this.textBox2.Location = new System.Drawing.Point(457, 21);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(239, 20);
-            this.textBox2.TabIndex = 2;
+            this.TotalBilltxt.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.TotalBilltxt.Location = new System.Drawing.Point(457, 47);
+            this.TotalBilltxt.Margin = new System.Windows.Forms.Padding(2);
+            this.TotalBilltxt.Maximum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+            this.TotalBilltxt.Name = "TotalBilltxt";
+            this.TotalBilltxt.Size = new System.Drawing.Size(239, 20);
+            this.TotalBilltxt.TabIndex = 14;
+            this.TotalBilltxt.ThousandsSeparator = true;
             // 
-            // textBox1
+            // label4
             // 
-            this.textBox1.Location = new System.Drawing.Point(92, 21);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(243, 20);
-            this.textBox1.TabIndex = 1;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(365, 24);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(68, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "DeliveryDate";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(21, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "OrderID";
+            // 
+            // OrderIDtxt
+            // 
+            this.OrderIDtxt.Location = new System.Drawing.Point(92, 47);
+            this.OrderIDtxt.Name = "OrderIDtxt";
+            this.OrderIDtxt.Size = new System.Drawing.Size(243, 20);
+            this.OrderIDtxt.TabIndex = 4;
+            // 
+            // DeliveryDatetxt
+            // 
+            this.DeliveryDatetxt.Location = new System.Drawing.Point(457, 21);
+            this.DeliveryDatetxt.Name = "DeliveryDatetxt";
+            this.DeliveryDatetxt.Size = new System.Drawing.Size(239, 20);
+            this.DeliveryDatetxt.TabIndex = 2;
+            // 
+            // SlipIDtxt
+            // 
+            this.SlipIDtxt.Location = new System.Drawing.Point(92, 21);
+            this.SlipIDtxt.Name = "SlipIDtxt";
+            this.SlipIDtxt.Size = new System.Drawing.Size(243, 20);
+            this.SlipIDtxt.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(21, 24);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 13);
+            this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Delivery Slip";
+            this.label2.Text = "SlipID";
             // 
             // groupBox2
             // 
@@ -194,52 +240,6 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Staff\'s Name";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "OrderID";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(365, 24);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "DeliveryDate";
-            // 
-            // ProductPriceNumInput
-            // 
-            this.ProductPriceNumInput.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.ProductPriceNumInput.Location = new System.Drawing.Point(457, 47);
-            this.ProductPriceNumInput.Margin = new System.Windows.Forms.Padding(2);
-            this.ProductPriceNumInput.Maximum = new decimal(new int[] {
-            1410065408,
-            2,
-            0,
-            0});
-            this.ProductPriceNumInput.Name = "ProductPriceNumInput";
-            this.ProductPriceNumInput.Size = new System.Drawing.Size(239, 20);
-            this.ProductPriceNumInput.TabIndex = 14;
-            this.ProductPriceNumInput.ThousandsSeparator = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(365, 50);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 13);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "TotalBill";
-            // 
             // CreateDeliverySlip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -256,12 +256,12 @@
             this.Load += new System.EventHandler(this.CreateDeliverySlip_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TotalBilltxt)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DeliverySlipGRD)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ProductPriceNumInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -282,12 +282,12 @@
         private System.Windows.Forms.ToolStripMenuItem actionToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem actionToolStripMenuItem4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox OrderIDtxt;
+        private System.Windows.Forms.TextBox DeliveryDatetxt;
+        private System.Windows.Forms.TextBox SlipIDtxt;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown ProductPriceNumInput;
+        private System.Windows.Forms.NumericUpDown TotalBilltxt;
     }
 }
