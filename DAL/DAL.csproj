@@ -45,7 +45,9 @@
     <Compile Include="Connection.cs" />
     <Compile Include="ProductDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StaffDAL.cs" />
     <Compile Include="WarehouseReceiptDAL.cs" />
+    <Compile Include="WarehouseReceiptDetailDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTO\DTO.csproj">

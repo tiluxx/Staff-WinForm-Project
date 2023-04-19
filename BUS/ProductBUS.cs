@@ -54,5 +54,10 @@ namespace BUS
         {
             return productDAL.SelectProductQuery();
         }
+
+        public string GetNewProductID()
+        {
+            return productDAL.GetNewProductID();
+        }
     }
 }

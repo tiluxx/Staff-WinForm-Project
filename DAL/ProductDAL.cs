@@ -52,7 +52,7 @@ namespace DAL
                 "', " + productDTO.GetProductQuantity +
                 "', " + productDTO.GetProductPrice +
                 "', " + isDeleted + ")";
-            Connection.ProductActionQuery(query);
+            Connection.ActionQuery(query);
         }
 
         public void UpdateProductQuery()
@@ -66,19 +66,24 @@ namespace DAL
                 ", ProductQuantity = " + productDTO.GetProductQuantity +
                 ", ProductPrice = " + productDTO.GetProductPrice +
                 " where ProductID = '" + productDTO.GetProductID + "'";
-            Connection.ProductActionQuery(query);
+            Connection.ActionQuery(query);
         }
 
         public void DeleteProductQuery()
         {
             string query = "delete from Product where ProductID = '" + productDTO.GetProductID + "'";
-            Connection.ProductActionQuery(query);
+            Connection.ActionQuery(query);
         }
 
         public DataTable SelectProductQuery()
         {
             string s = "select * from Product";
-            return Connection.ProductSelectQuery(s);
+            return Connection.SelectQuery(s);
+        }
+
+        public string GetNewProductID()
+        {
+            return "";
         }
     }
 }
