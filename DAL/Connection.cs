@@ -13,23 +13,24 @@ namespace DAL
     {
         private static SqlConnection dbConn;
         private static readonly String dbConnString = ConfigurationManager.ConnectionStrings["DBConn"].ConnectionString;
-        public static void connect()
+
+        public static void Connect()
         {
             dbConn = new SqlConnection(dbConnString);
             dbConn.Open();
         }
 
-        public static void ProductActionQuery(string sql)
+        public static void ActionQuery(string sql)
         {
-            connect();
+            Connect();
             SqlCommand cmd = new SqlCommand(sql, dbConn);
 
             cmd.ExecuteNonQuery();
         }
 
-        public static DataTable ProductSelectQuery(string sql)
+        public static DataTable SelectQuery(string sql)
         {
-            connect();
+            Connect();
             SqlDataAdapter dataAdapter = new SqlDataAdapter(sql, dbConn);
             DataTable dt = new DataTable();
             dataAdapter.Fill(dt);

@@ -40,7 +40,7 @@ namespace DAL
                 "', '" + inportDate +
                 "', " + warehouseReceiptDTO.GetWarehouseReceiptTotalBill +
                 "', " + isDeleted + ")";
-            Connection.ProductActionQuery(query);
+            Connection.ActionQuery(query);
         }
 
         public void UpdateWarehouseReceiptQuery()
@@ -51,19 +51,24 @@ namespace DAL
                 "', ImportDate = '" + inportDate +
                 "', TotalBill = " + warehouseReceiptDTO.GetWarehouseReceiptTotalBill +
                 " where WarehouseReceiptID = '" + warehouseReceiptDTO.GetWarehouseReceiptID + "'";
-            Connection.ProductActionQuery(query);
+            Connection.ActionQuery(query);
         }
 
         public void DeleteWarehouseReceiptQuery()
         {
             string query = "delete from WarehouseReceipt where WarehouseReceiptID = '" + warehouseReceiptDTO.GetWarehouseReceiptID + "'";
-            Connection.ProductActionQuery(query);
+            Connection.ActionQuery(query);
         }
 
         public DataTable SelectWarehouseReceiptQuery()
         {
             string s = "select * from WarehouseReceipt";
-            return Connection.ProductSelectQuery(s);
+            return Connection.SelectQuery(s);
+        }
+
+        public string GetNewWarehouseReceiptID()
+        {
+            return "";
         }
     }
 }

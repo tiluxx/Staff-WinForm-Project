@@ -45,5 +45,10 @@ namespace BUS
         {
             return warehouseReceiptDAL.SelectWarehouseReceiptQuery();
         }
+
+        public string GetNewWarehouseReceiptID()
+        {
+            return warehouseReceiptDAL.GetNewWarehouseReceiptID();
+        }
     }
 }
