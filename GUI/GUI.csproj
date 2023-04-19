@@ -53,6 +53,12 @@
     <Compile Include="CreateWarehouseReceipt.Designer.cs">
       <DependentUpon>CreateWarehouseReceipt.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateDeliverySlip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateDeliverySlip.Designer.cs">
+      <DependentUpon>CreateDeliverySlip.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginStaffForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +69,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CreateWarehouseReceipt.resx">
       <DependentUpon>CreateWarehouseReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateDeliverySlip.resx">
+      <DependentUpon>CreateDeliverySlip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginStaffForm.resx">
       <DependentUpon>LoginStaffForm.cs</DependentUpon>
