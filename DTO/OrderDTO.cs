@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class OrderDTO
+    internal class OrderDTO
     {
         private string orderID, agentID, orderStatus, paymentStatus, paymentMethod;
         private decimal totalBill;
