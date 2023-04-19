@@ -60,5 +60,14 @@ namespace GUI
         {
             this.LayoutMdi(MdiLayout.TileVertical);
         }
+
+        private void createDeliverySlipToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateWarehouseReceipt createWarehouseReceipt = new CreateWarehouseReceipt
+            {
+                MdiParent = this
+            };
+            createWarehouseReceipt.Show();
+        }
     }
 }

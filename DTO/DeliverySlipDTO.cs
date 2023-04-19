@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    internal class DeliverySlipDTO
+     public class DeliverySlipDTO
     {
         private string slipID, orderID;
         private DateTime deliveryDate;
@@ -49,7 +49,7 @@ namespace DTO
                 deliveryDate = value;
             }
         }
-        public decimal GetTotalBill
+        public decimal GetDeliverySlipTotalBill
         {
             get
             {
@@ -61,7 +61,7 @@ namespace DTO
             }
         }
 
-        public bool GetDeliverySlipDeleted
+        public bool CheckDeliverySlipDeleted
         {
             get
             {

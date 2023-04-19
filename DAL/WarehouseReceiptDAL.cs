@@ -45,10 +45,10 @@ namespace DAL
 
         public void UpdateWarehouseReceiptQuery()
         {
-            string inportDate = warehouseReceiptDTO.GetImportDate.ToString("yyyy-MM-dd HH:mm:ss");
+            string importDate = warehouseReceiptDTO.GetImportDate.ToString("yyyy-MM-dd HH:mm:ss");
             string query = "update WarehouseReceipt set" +
                 " StaffID = '" + warehouseReceiptDTO.GetStaffID +
-                "', ImportDate = '" + inportDate +
+                "', ImportDate = '" + importDate +
                 "', TotalBill = " + warehouseReceiptDTO.GetWarehouseReceiptTotalBill +
                 " where WarehouseReceiptID = '" + warehouseReceiptDTO.GetWarehouseReceiptID + "'";
             Connection.ActionQuery(query);
