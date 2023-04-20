@@ -135,5 +135,47 @@ namespace GUI
             currOrderProductList = orderDetailBUS.GetOrderProductByOrderID();
             ProductGrd.DataSource = currOrderProductList;
         }
+
+        private void OrderStatusCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataGridViewRow currentRow = OrderListGRD.CurrentRow;
+            string orderStatus = OrderStatusCB.SelectedItem.ToString();
+            string orderID = currentRow.Cells[0].Value.ToString();
+            DateTime orderDate = Convert.ToDateTime(currentRow.Cells[1].Value.ToString());
+            string agentID = currentRow.Cells[2].Value.ToString();
+            string paymentStatus = currentRow.Cells[4].Value.ToString();
+            DateTime paymentDate = Convert.ToDateTime(currentRow.Cells[5].Value.ToString());
+            string paymentMethod = currentRow.Cells[6].Value.ToString();
+            decimal totalBill = Convert.ToDecimal(currentRow.Cells[7].Value.ToString());
+            orderBUS = new BUS.OrderBUS(orderID, agentID, orderStatus, paymentStatus, paymentMethod, false, totalBill, orderDate, paymentDate);
+            orderBUS.UpdateOrderQuery();
+
+            if (orderStatus.Equals("Delivery In Progress"))
+            {
+                string newDeliverySlipID = deliverySlipBUS.GetNewDeliverySlipID();
+                deliverySlipBUS = new BUS.DeliverySlipBUS(newDeliverySlipID, orderID, DateTime.Now, false, totalBill);
+                deliverySlipBUS.AddDeliverySlipQuery();
+            }
+
+            ShowGRD();
+        }
+
+        private void PaymentStatusCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataGridViewRow currentRow = OrderListGRD.CurrentRow;
+            string paymentStatus = PaymentStatusCB.SelectedItem.ToString();
+            string orderID = currentRow.Cells[0].Value.ToString();
+            DateTime orderDate = Convert.ToDateTime(currentRow.Cells[1].Value.ToString());
+            string agentID = currentRow.Cells[2].Value.ToString();
+            string orderStatus = currentRow.Cells[3].Value.ToString();
+            DateTime paymentDate = DateTime.Now;
+            string paymentMethod = currentRow.Cells[6].Value.ToString();
+            decimal totalBill = Convert.ToDecimal(currentRow.Cells[7].Value.ToString());
+
+            orderBUS = new BUS.OrderBUS(orderID, agentID, orderStatus, paymentStatus, paymentMethod, false, totalBill, orderDate, paymentDate);
+            orderBUS.UpdateOrderQuery();
+
+            ShowGRD();
+        }
     }
 }

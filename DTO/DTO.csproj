@@ -41,12 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentAccountDTO.cs" />
     <Compile Include="AgentDTO.cs" />
+    <Compile Include="CartDetailDTO.cs" />
+    <Compile Include="CartDTO.cs" />
+    <Compile Include="CustomerAccountDTO.cs" />
+    <Compile Include="CustomerDTO.cs" />
+    <Compile Include="DeliveryCustomerReceiptDTO.cs" />
     <Compile Include="DeliverySlipDTO.cs" />
     <Compile Include="OrderDetailDTO.cs" />
     <Compile Include="OrderDTO.cs" />
     <Compile Include="ProductDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StaffAccountDTO.cs" />
     <Compile Include="StaffDTO.cs" />
     <Compile Include="WarehouseReceiptDetailDTO.cs" />
     <Compile Include="WarehouseReceiptDTO.cs" />

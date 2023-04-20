@@ -48,7 +48,7 @@ namespace BUS
             return agentDAL.SelectAgentQuery();
         }
 
-        public string GetNewStaffID()
+        public string GetNewAgentID()
         {
             return agentDAL.GetNewAgentID();
         }

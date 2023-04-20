@@ -41,12 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentAccountBUS.cs" />
     <Compile Include="AgentBUS.cs" />
+    <Compile Include="CartBUS.cs" />
+    <Compile Include="CartDetailBUS.cs" />
+    <Compile Include="CustomerAccountBUS.cs" />
+    <Compile Include="CustomerBUS.cs" />
+    <Compile Include="DeliveryCustomerReceiptBUS.cs" />
     <Compile Include="DeliverySlipBUS.cs" />
     <Compile Include="OrderBUS.cs" />
     <Compile Include="OrderDetailBUS.cs" />
     <Compile Include="ProductBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StaffAccountBUS.cs" />
     <Compile Include="StaffBUS.cs" />
     <Compile Include="WarehouseReceiptBUS.cs" />
     <Compile Include="WarehouseReceiptDetailBUS.cs" />

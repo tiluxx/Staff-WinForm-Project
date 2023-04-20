@@ -17,7 +17,7 @@ namespace DAL
             string AgentEmail,
             string AgentPhoneNum,
             string AgentAdress,
-            bool AgentfDeleted)
+            bool AgentDeleted)
         {
             agentDTO = new DTO.AgentDTO(
                 AgentID,
@@ -25,7 +25,7 @@ namespace DAL
                 AgentEmail,
                 AgentPhoneNum,
                 AgentAdress,
-                AgentfDeleted);
+                AgentDeleted);
         }
 
         public void AddAgentQuery()
