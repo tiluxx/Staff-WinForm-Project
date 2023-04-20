@@ -1,4 +1,6 @@
 ﻿using BUS;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,14 +17,15 @@ using System.Xml.Linq;
 
 namespace GUI
 {
-    public partial class CreateDeliverySlip : Form
+    public partial class CreateDeliverySlipForm : Form
     {
         private BUS.DeliverySlipBUS deliverySlipBUS;
         private BUS.OrderBUS orderBUS;
+        private BUS.OrderDetailBUS orderDetailBUS;
         private BUS.ProductBUS productBUS;
-        private int btnType = 0;
+        private DataTable currOrderProductList;
 
-        public CreateDeliverySlip()
+        public CreateDeliverySlipForm()
         {
             InitializeComponent();
         }
@@ -30,34 +33,35 @@ namespace GUI
         private void CreateDeliverySlip_Load(object sender, EventArgs e)
         {
             deliverySlipBUS = new BUS.DeliverySlipBUS("", "", DateTime.Now, false, 0);
-            orderBUS = new BUS.OrderBUS("","","","","",false,0, DateTime.Now, DateTime.Now);
+            orderBUS = new BUS.OrderBUS("", "", "", "", "", false, 0, DateTime.Now, DateTime.Now);
             productBUS = new BUS.ProductBUS("", "", "", "", "", "", 0, false, 0);
-            DeliverySlipGRD.DataSource = orderBUS.SelectOrderQuery();
+            OrderListGRD.DataSource = orderBUS.SelectOrderQuery();
+            OrderInforGroup.Enabled = false;
+            OrderStatusCB.Enabled = true;
+            PaymentStatusCB.Enabled = true;
+            PaymentMethodCB.Enabled = true;
         }
 
         public void ShowGRD()
         {
-            DeliverySlipGRD.DataSource = deliverySlipBUS.SelectDeliverySlipQuery();
+            OrderListGRD.DataSource = deliverySlipBUS.SelectDeliverySlipQuery();
         }
 
         private void CreateDeliverySlipBtn_Click(object sender, EventArgs e)
         {
-            if (SlipIDtxt.Text.Equals("") || SlipIDtxt == null)
+            if (currOrderProductList == null || currOrderProductList.Rows.Count < 1)
             {
-                MessageBox.Show("An error occurred", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please choose an order to create", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            string sql = "select * from DeliverySlip where SlipID = '" + SlipIDtxt.Text + "'";
-            data = new SqlDataAdapter(sql, conn);
-            tb = new DataTable();
-            data.Fill(tb);
-
-            if (tb.Rows.Count > 0)
+            if (currOrderProductList.Rows.Count > 0)
             {
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "PDF (*.pdf)|*.pdf";
-                sfd.FileName = "Output.pdf";
+                SaveFileDialog sfd = new SaveFileDialog
+                {
+                    Filter = "PDF (*.pdf)|*.pdf",
+                    FileName = "Delivery Slip_" + OrderListGRD.CurrentRow.Cells[0].Value.ToString() + ".pdf"
+                };
                 bool fileError = false;
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
@@ -77,27 +81,27 @@ namespace GUI
                     {
                         try
                         {
-                            PdfPTable pdfTable = new PdfPTable(tb.Columns.Count);
+                            PdfPTable pdfTable = new PdfPTable(currOrderProductList.Columns.Count);
                             pdfTable.DefaultCell.Padding = 3;
                             pdfTable.WidthPercentage = 100;
                             pdfTable.HorizontalAlignment = Element.ALIGN_LEFT;
-                            foreach (DataColumn column in tb.Columns)
+                            foreach (DataColumn column in currOrderProductList.Columns)
                             {
                                 PdfPCell cell = new PdfPCell(new Phrase(column.ColumnName));
                                 pdfTable.AddCell(cell);
                             }
 
-                            for (int i = 0; i < tb.Rows.Count; ++i)
+                            for (int i = 0; i < currOrderProductList.Rows.Count; ++i)
                             {
-                                for (int j = 0; j < tb.Columns.Count; ++j)
+                                for (int j = 0; j < currOrderProductList.Columns.Count; ++j)
                                 {
                                     if (j != 3)
                                     {
-                                        pdfTable.AddCell(tb.Rows[i][j].ToString());
+                                        pdfTable.AddCell(currOrderProductList.Rows[i][j].ToString());
                                     }
                                     else
                                     {
-                                        string date = tb.Rows[i][j].ToString();
+                                        string date = currOrderProductList.Rows[i][j].ToString();
                                         pdfTable.AddCell(date.Split(' ')[0]);
                                     }
 
@@ -113,7 +117,7 @@ namespace GUI
                                 stream.Close();
                             }
 
-                            MessageBox.Show("Data Exported Successfully !!!", "Info");
+                            MessageBox.Show("Create Delivery Slip Successfully !!!", "Info");
                         }
                         catch (Exception ex)
                         {
@@ -122,7 +126,14 @@ namespace GUI
                     }
                 }
             }
-    }
-        
+        }
 
+        private void OrderListGRD_Click(object sender, EventArgs e)
+        {
+            string orderID = OrderListGRD.CurrentRow.Cells[0].Value.ToString();
+            orderDetailBUS = new BUS.OrderDetailBUS(orderID, "", 0);
+            currOrderProductList = orderDetailBUS.GetOrderProductByOrderID();
+            ProductGrd.DataSource = currOrderProductList;
+        }
+    }
 }

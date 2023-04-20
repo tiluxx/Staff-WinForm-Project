@@ -67,7 +67,7 @@ namespace DAL
             return Connection.SelectQuery(s);
         }
 
-        public string GetNewDeliverySlip()
+        public string GetNewDeliverySlipID()
         {
             return "";
         }

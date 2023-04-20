@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class CreateWarehouseReceipt : Form
+    public partial class CreateWarehouseReceiptForm : Form
     {
         private BUS.WarehouseReceiptBUS warehouseReceiptBUS;
         private BUS.WarehouseReceiptDetailBUS warehouseReceiptDetailBUS;
@@ -21,7 +21,7 @@ namespace GUI
         // btnType = 1 -> Add button
         // btnType = 2 -> Edit button
 
-        public CreateWarehouseReceipt()
+        public CreateWarehouseReceiptForm()
         {
             InitializeComponent();
         }

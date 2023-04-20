@@ -24,7 +24,7 @@ namespace GUI
 
         private void CreateWarehouseReceiptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateWarehouseReceipt createWarehouseReceipt = new CreateWarehouseReceipt
+            CreateWarehouseReceiptForm createWarehouseReceipt = new CreateWarehouseReceiptForm
             {
                 MdiParent = this
             };
@@ -63,7 +63,7 @@ namespace GUI
 
         private void createDeliverySlipToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateWarehouseReceipt createWarehouseReceipt = new CreateWarehouseReceipt
+            CreateWarehouseReceiptForm createWarehouseReceipt = new CreateWarehouseReceiptForm
             {
                 MdiParent = this
             };
