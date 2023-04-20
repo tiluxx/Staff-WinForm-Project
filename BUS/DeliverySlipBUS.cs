@@ -46,9 +46,9 @@ namespace BUS
             return deliverySlipDAL.SelectDeliverySlipQuery();
         }
 
-        public string GetNewDeliverySlip()
+        public string GetNewDeliverySlipID()
         {
-            return deliverySlipDAL.GetNewDeliverySlip();
+            return deliverySlipDAL.GetNewDeliverySlipID();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace GUI
 {
-    partial class CreateWarehouseReceipt
+    partial class CreateWarehouseReceiptForm
     {
         /// <summary>
         /// Required designer variable.

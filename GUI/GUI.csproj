@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -47,17 +53,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateWarehouseReceipt.cs">
+    <Compile Include="CreateWarehouseReceiptForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateWarehouseReceipt.Designer.cs">
-      <DependentUpon>CreateWarehouseReceipt.cs</DependentUpon>
+    <Compile Include="CreateWarehouseReceiptForm.Designer.cs">
+      <DependentUpon>CreateWarehouseReceiptForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateDeliverySlip.cs">
+    <Compile Include="CreateDeliverySlipForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateDeliverySlip.Designer.cs">
-      <DependentUpon>CreateDeliverySlip.cs</DependentUpon>
+    <Compile Include="CreateDeliverySlipForm.Designer.cs">
+      <DependentUpon>CreateDeliverySlipForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalVariable.cs" />
     <Compile Include="LoginStaffForm.cs">
@@ -74,11 +80,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CreateDeliverySlip.resx">
-      <DependentUpon>CreateDeliverySlip.cs</DependentUpon>
+    <EmbeddedResource Include="CreateDeliverySlipForm.resx">
+      <DependentUpon>CreateDeliverySlipForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreateWarehouseReceipt.resx">
-      <DependentUpon>CreateWarehouseReceipt.cs</DependentUpon>
+    <EmbeddedResource Include="CreateWarehouseReceiptForm.resx">
+      <DependentUpon>CreateWarehouseReceiptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginStaffForm.resx">
       <DependentUpon>LoginStaffForm.cs</DependentUpon>
@@ -95,6 +101,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
