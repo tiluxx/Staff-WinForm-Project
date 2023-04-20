@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentDAL.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="DeliverySlipDAL.cs" />
     <Compile Include="OrderDAL.cs" />
