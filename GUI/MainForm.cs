@@ -47,7 +47,11 @@ namespace GUI
 
         private void OrderManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            CreateDeliverySlipForm createDeliverySlipForm = new CreateDeliverySlipForm
+            {
+                MdiParent = this
+            };
+            createDeliverySlipForm.Show();
         }
 
         private void ViewOrdersToolStripMenuItem_Click(object sender, EventArgs e)
