@@ -46,6 +46,11 @@ namespace BUS
             return staffAccountDAL.SelectStaffAcQuery();
         }
 
+        public List<String> CheckStaffLogin(string username, string password)
+        {
+            return staffAccountDAL.CheckStaffLogin(username, password);
+        }
+
         public string GetNewStaffAcID()
         {
             return staffAccountDAL.GetNewStaffAcID();

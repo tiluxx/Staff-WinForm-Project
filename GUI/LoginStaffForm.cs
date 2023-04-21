@@ -13,7 +13,7 @@ namespace GUI
 {
     public partial class LoginStaffForm : Form
     {
-        private BUS.ProductBUS productBUS;
+        private BUS.StaffAccountBUS staffAccountBUS;
 
         public LoginStaffForm()
         {
@@ -22,7 +22,7 @@ namespace GUI
 
         private void LoginStaffForm_Load(object sender, EventArgs e)
         {
-            productBUS = new BUS.ProductBUS("", "", "", "", "", "", 0, false, 0);
+            staffAccountBUS = new BUS.StaffAccountBUS("", "", "", false, false);
         }
 
         private void LoginBtn_Click(object sender, EventArgs e)
@@ -41,10 +41,11 @@ namespace GUI
                 return;
             }
 
-            if (username == "admin" && password == "123456")
+            List<String> res = staffAccountBUS.CheckStaffLogin(username, password);
+            if (!res[1].Equals(""))
             {
                 MessageBox.Show("Login successfully!");
-                GlobalVariable.UserID = username;
+                GlobalVariable.UserID = res[1];
                 MainForm formMain = new MainForm();
                 formMain.Show();
                 this.Hide();

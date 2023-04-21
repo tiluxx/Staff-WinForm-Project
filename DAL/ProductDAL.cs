@@ -50,8 +50,8 @@ namespace DAL
                 "', '" + productDTO.GetProductBrand +
                 "', '" + productDTO.GetProductOrigin +
                 "', " + productDTO.GetProductQuantity +
-                "', " + productDTO.GetProductPrice +
-                "', " + isDeleted + ")";
+                ", " + productDTO.GetProductPrice +
+                ", " + isDeleted + ")";
             Connection.ActionQuery(query);
         }
 
@@ -63,7 +63,7 @@ namespace DAL
                 "', ProductUnitSize = '" + productDTO.GetProductUnitSize +
                 "', ProductBrand = '" + productDTO.GetProductBrand +
                 "', ProductOrigin = '" + productDTO.GetProductOrigin +
-                ", ProductQuantity = " + productDTO.GetProductQuantity +
+                "', ProductQuantity = " + productDTO.GetProductQuantity +
                 ", ProductPrice = " + productDTO.GetProductPrice +
                 " where ProductID = '" + productDTO.GetProductID + "'";
             Connection.ActionQuery(query);
@@ -81,9 +81,54 @@ namespace DAL
             return Connection.SelectQuery(s);
         }
 
+        // Get table in desc order
+        private DataTable GetProjectDesc()
+        {
+            string s = "select top 1 ProductID from Product order by ProductID desc";
+            return Connection.SelectQuery(s);
+        }
+
         public string GetNewProductID()
         {
-            return "";
+            DataTable resTable = GetProjectDesc();
+            if (resTable.Rows.Count > 0)
+            {
+                string res = resTable.Rows[0][0].ToString();
+                int order = int.Parse(res.Substring(4)) + 1;
+                if (order < 10)
+                {
+                    res = "MPVN00000" + order.ToString();
+                }
+                else if (order < 100)
+                {
+                    res = "MPVN0000" + order.ToString();
+                }
+                else if (order < 1000)
+                {
+                    res = "MPVN000" + order.ToString();
+                }
+                else if (order < 10000)
+                {
+                    res = "MPVN00" + order.ToString();
+                }
+                else if (order < 100000)
+                {
+                    res = "MPVN00" + order.ToString();
+                }
+                else if (order < 1000000)
+                {
+                    res = "MPVN0" + order.ToString();
+                }
+                else
+                {
+                    res = "MPVN" + order.ToString();
+                }
+                return res;
+            }
+            else
+            {
+                return "MPVN000001";
+            }
         }
     }
 }

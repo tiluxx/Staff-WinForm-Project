@@ -41,7 +41,7 @@ namespace DAL
             {
                 isDeleted = 1;
             }
-            string query = "insert into Order values ('" +
+            string query = "insert into _Order values ('" +
                 orderDTO.GetOrderID +
                 "', '" + orderDTO.GetAgentID +
                 "', '" + orderDTO.GetOrderStatus +
@@ -56,7 +56,7 @@ namespace DAL
 
         public void UpdateOrderQuery()
         {
-            string query = "update Order set" +
+            string query = "update _Order set" +
                 " AgentID = '" + orderDTO.GetAgentID +
                 "', OrderStatus = '" + orderDTO.GetOrderStatus +
                 "', PaymentStatus = '" + orderDTO.GetPaymentStatus +
@@ -70,13 +70,13 @@ namespace DAL
 
         public void DeleteOrderQuery()
         {
-            string query = "delete from Order where OrderID = '" + orderDTO.GetOrderID + "'";
+            string query = "delete from _Order where OrderID = '" + orderDTO.GetOrderID + "'";
             Connection.ActionQuery(query);
         }
 
         public DataTable SelectOrderQuery()
         {
-            string s = "select * from Order";
+            string s = "select * from _Order";
             return Connection.SelectQuery(s);
         }
     }

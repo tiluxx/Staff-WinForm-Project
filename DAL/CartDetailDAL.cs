@@ -37,7 +37,7 @@ namespace DAL
         {
             string query = "update Cart set" +
                  "', ProductID = '" + cartDetailDTO.GetProductID +
-                 "', Quantity = '" + cartDetailDTO.GetCartQuantity +
+                 "', Quantity = " + cartDetailDTO.GetCartQuantity +
                  " where CartID = '" + cartDetailDTO.GetCartID + "'";
             Connection.ActionQuery(query);
         }

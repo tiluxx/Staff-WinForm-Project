@@ -39,7 +39,7 @@ namespace DAL
                 "', '" + warehouseReceiptDTO.GetStaffID +
                 "', '" + inportDate +
                 "', " + warehouseReceiptDTO.GetWarehouseReceiptTotalBill +
-                "', " + isDeleted + ")";
+                ", " + isDeleted + ")";
             Connection.ActionQuery(query);
         }
 

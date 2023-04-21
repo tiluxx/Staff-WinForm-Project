@@ -65,6 +65,26 @@ namespace DAL
             return Connection.SelectQuery(s);
         }
 
+        public List<String> CheckStaffLogin(string username, string password)
+        {
+            string s = "select U.UserID from _User U, UserAccount UA" +
+                    " where (U.UserID = '" + username + "' or UA.UserName = '" + username + "')" +
+                    " and UA.UserPassword = '" + password + "'";
+            DataTable resQuery = Connection.SelectQuery(s);
+
+            List<String> res = new List<String>();
+            if (resQuery.Rows.Count < 1)
+            {
+                res.Add("false");
+                res.Add("");
+                return res;
+            }
+            res.Add("true");
+            res.Add(resQuery.Rows[0][0].ToString());
+
+            return res;
+        }
+
         public string GetNewStaffAcID()
         {
             return "";

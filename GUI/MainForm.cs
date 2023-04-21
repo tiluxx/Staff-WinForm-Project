@@ -38,7 +38,11 @@ namespace GUI
 
         private void ReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            StaffViewReportForm staffViewReportForm = new StaffViewReportForm
+            {
+                MdiParent = this
+            };
+            staffViewReportForm.Show();
         }
 
         private void OrderManagementToolStripMenuItem_Click(object sender, EventArgs e)

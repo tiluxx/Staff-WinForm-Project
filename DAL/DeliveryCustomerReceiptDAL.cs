@@ -30,6 +30,7 @@ namespace DAL
                 PaymentMethod,
                 PaymentDate);
         }
+
         public void AddDeliveryCustomerReceiptQuery()
         {  
             string query = "insert into DeliveryCustomerReceipt values ('" +
@@ -58,7 +59,7 @@ namespace DAL
 
         public void DeleteDeliveryCustomerReceiptQuery()
         {
-            string query = "delete from DeliveryCustomerReceipt where ReceiptID = '" + deliveryCustomerReceiptDTO.GetOrderID + "'";
+            string query = "delete from DeliveryCustomerReceipt where ReceiptID = '" + deliveryCustomerReceiptDTO.GetDeliveryCustomerReceiptID + "'";
             Connection.ActionQuery(query);
         }
 
