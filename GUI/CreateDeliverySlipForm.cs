@@ -22,8 +22,9 @@ namespace GUI
         private BUS.DeliverySlipBUS deliverySlipBUS;
         private BUS.OrderBUS orderBUS;
         private BUS.OrderDetailBUS orderDetailBUS;
-        private BUS.ProductBUS productBUS;
         private DataTable currOrderProductList;
+        private string currOrderStatus;
+        private string currPaymentStatus;
 
         public CreateDeliverySlipForm()
         {
@@ -34,17 +35,25 @@ namespace GUI
         {
             deliverySlipBUS = new BUS.DeliverySlipBUS("", "", DateTime.Now, false, 0);
             orderBUS = new BUS.OrderBUS("", "", "", "", "", false, 0, DateTime.Now, DateTime.Now);
-            productBUS = new BUS.ProductBUS("", "", "", "", "", "", 0, false, 0);
             OrderListGRD.DataSource = orderBUS.SelectOrderQuery();
-            OrderInforGroup.Enabled = false;
-            OrderStatusCB.Enabled = true;
-            PaymentStatusCB.Enabled = true;
-            PaymentMethodCB.Enabled = true;
+
+            // Disable sensitive input
+            OrderIDtxt.Enabled = false;
+            AgentIDTxt.Enabled = false;
+            OrderDateTxt.Enabled = false;
+            TotalBillInput.Enabled = false;
+            PaymentDateTxt.Enabled = false;
+            PaymentMethodCB.Enabled = false;
+            OrderStatusCB.Enabled = false;
+            PaymentStatusCB.Enabled = false;
+            PaymentMethodCB.Enabled = false;
+
+            OrderListGRD.DataSource = orderBUS.SelectOrderQuery();
         }
 
         public void ShowGRD()
         {
-            OrderListGRD.DataSource = deliverySlipBUS.SelectDeliverySlipQuery();
+            OrderListGRD.DataSource = orderBUS.SelectOrderQuery();
         }
 
         private void CreateDeliverySlipBtn_Click(object sender, EventArgs e)
@@ -117,11 +126,12 @@ namespace GUI
                                 stream.Close();
                             }
 
-                            MessageBox.Show("Create Delivery Slip Successfully !!!", "Info");
+                            MessageBox.Show("Create Delivery Slip Successfully!", "Info");
+                            ProductGrd.Refresh();
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Error :" + ex.Message);
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
@@ -130,51 +140,74 @@ namespace GUI
 
         private void OrderListGRD_Click(object sender, EventArgs e)
         {
-            string orderID = OrderListGRD.CurrentRow.Cells[0].Value.ToString();
+            DataGridViewRow currentRow = OrderListGRD.CurrentRow;
+
+            // Get product list of current order
+            string orderID = currentRow.Cells[0].Value.ToString();
             orderDetailBUS = new BUS.OrderDetailBUS(orderID, "", 0);
             currOrderProductList = orderDetailBUS.GetOrderProductByOrderID();
             ProductGrd.DataSource = currOrderProductList;
+
+            // Get information of current order
+            OrderIDtxt.Text = currentRow.Cells[0].Value.ToString();
+            OrderDateTxt.Text = currentRow.Cells[1].Value.ToString();
+            AgentIDTxt.Text = currentRow.Cells[2].Value.ToString();
+            OrderStatusCB.Text = currentRow.Cells[3].Value.ToString();
+            PaymentStatusCB.Text = currentRow.Cells[4].Value.ToString();
+            PaymentDateTxt.Text = currentRow.Cells[5].Value.ToString();
+            PaymentMethodCB.Text = currentRow.Cells[6].Value.ToString();
+            TotalBillInput.Value = Convert.ToDecimal(currentRow.Cells[7].Value.ToString());
+
+            // Update current state of order and payment status
+            currOrderStatus = currentRow.Cells[3].Value.ToString();
+            currPaymentStatus = currentRow.Cells[4].Value.ToString();
+
+            // Enable update action input
+            OrderStatusCB.Enabled = true;
+            PaymentStatusCB.Enabled = true;
+            PaymentMethodCB.Enabled = true;
         }
 
-        private void OrderStatusCB_SelectedIndexChanged(object sender, EventArgs e)
+        private void UpdateStatusBtn_Click(object sender, EventArgs e)
         {
-            DataGridViewRow currentRow = OrderListGRD.CurrentRow;
-            string orderStatus = OrderStatusCB.SelectedItem.ToString();
-            string orderID = currentRow.Cells[0].Value.ToString();
-            DateTime orderDate = Convert.ToDateTime(currentRow.Cells[1].Value.ToString());
-            string agentID = currentRow.Cells[2].Value.ToString();
-            string paymentStatus = currentRow.Cells[4].Value.ToString();
-            DateTime paymentDate = Convert.ToDateTime(currentRow.Cells[5].Value.ToString());
-            string paymentMethod = currentRow.Cells[6].Value.ToString();
-            decimal totalBill = Convert.ToDecimal(currentRow.Cells[7].Value.ToString());
-            orderBUS = new BUS.OrderBUS(orderID, agentID, orderStatus, paymentStatus, paymentMethod, false, totalBill, orderDate, paymentDate);
-            orderBUS.UpdateOrderQuery();
-
-            if (orderStatus.Equals("Delivery In Progress"))
+            if (OrderIDtxt == null || OrderIDtxt.Text.Equals(""))
             {
-                string newDeliverySlipID = deliverySlipBUS.GetNewDeliverySlipID();
-                deliverySlipBUS = new BUS.DeliverySlipBUS(newDeliverySlipID, orderID, DateTime.Now, false, totalBill);
-                deliverySlipBUS.AddDeliverySlipQuery();
+                MessageBox.Show("Please choose an order to update", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
-            ShowGRD();
-        }
-
-        private void PaymentStatusCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DataGridViewRow currentRow = OrderListGRD.CurrentRow;
+            string orderStatus = OrderStatusCB.SelectedItem.ToString();
             string paymentStatus = PaymentStatusCB.SelectedItem.ToString();
-            string orderID = currentRow.Cells[0].Value.ToString();
-            DateTime orderDate = Convert.ToDateTime(currentRow.Cells[1].Value.ToString());
-            string agentID = currentRow.Cells[2].Value.ToString();
-            string orderStatus = currentRow.Cells[3].Value.ToString();
-            DateTime paymentDate = DateTime.Now;
-            string paymentMethod = currentRow.Cells[6].Value.ToString();
-            decimal totalBill = Convert.ToDecimal(currentRow.Cells[7].Value.ToString());
+            string orderID = OrderIDtxt.Text;
 
-            orderBUS = new BUS.OrderBUS(orderID, agentID, orderStatus, paymentStatus, paymentMethod, false, totalBill, orderDate, paymentDate);
-            orderBUS.UpdateOrderQuery();
 
+            if (!currOrderStatus.Equals(orderStatus))
+            {
+                orderBUS = new BUS.OrderBUS(orderID, "", orderStatus, "", "", false, 0, DateTime.Now, DateTime.Now);
+                orderBUS.UpdateOrderStatusQuery();
+
+                if (orderStatus.Equals("Delivery In Progress"))
+                {
+                    string newDeliverySlipID = deliverySlipBUS.GetNewDeliverySlipID();
+                    deliverySlipBUS = new BUS.DeliverySlipBUS(newDeliverySlipID, orderID, DateTime.Now, false, 0);
+                    deliverySlipBUS.AddDeliverySlipQuery();
+                }
+            }
+
+            if (!currPaymentStatus.Equals(paymentStatus))
+            {
+                orderBUS = new BUS.OrderBUS(orderID, "", "", paymentStatus, "", false, 0, DateTime.Now, DateTime.Now);
+
+                if (paymentStatus.Equals("Payment Received") || paymentStatus.Equals("Completed"))
+                {
+                    orderBUS.UpdateOrderPaymentStatusQuery(true);
+                }
+                else
+                {
+                    orderBUS.UpdateOrderPaymentStatusQuery(false);
+                }
+            }
+            
             ShowGRD();
         }
     }

@@ -307,7 +307,7 @@ namespace GUI
                 // Print pdf file
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "PDF (*.pdf)|*.pdf";
-                sfd.FileName = "Warehouse Receipt" + warehouseReceiptID + ".pdf";
+                sfd.FileName = "Warehouse Receipt_" + warehouseReceiptID + ".pdf";
                 bool fileError = false;
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
@@ -365,22 +365,22 @@ namespace GUI
                                 content.SetFontAndSize(bf, 8);
                                 content.BeginText();
                                 string text = "Long & Tien Co., Ltd";
-                                content.ShowTextKerned(text);
+                                content.ShowTextAlignedKerned(1, text, 100, 100, 0);
                                 content.EndText();
 
                                 content.BeginText();
                                 text = "Receipt ID: " + warehouseReceiptID;
-                                content.ShowTextKerned(text);
+                                content.ShowTextAlignedKerned(1, text, 100, 200, 0);
                                 content.EndText();
 
                                 content.BeginText();
                                 text = "Staff ID: " + staffID;
-                                content.ShowTextKerned(text);
+                                content.ShowTextAlignedKerned(1, text, 100, 300, 0);
                                 content.EndText();
 
                                 content.BeginText();
                                 text = "Date created: " + createdDate;
-                                content.ShowTextKerned(text);
+                                content.ShowTextAlignedKerned(1, text, 100, 400, 0);
                                 content.EndText();
 
                                 pdfDoc.Add(pdfTable);

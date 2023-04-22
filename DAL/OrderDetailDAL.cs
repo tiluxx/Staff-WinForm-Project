@@ -45,7 +45,7 @@ namespace DAL
 
         public DataTable GetOrderProductByOrderID()
         {
-            string s = "select P.*, O.ProductQuantity from OrderDetail O, Product P where O.OrderID = '" + orderDetailDTO.GetOrderID + "' and O.ProductID = P.ProductID";
+            string s = "select P.*, O.Quantity from OrderDetail O, Product P where O.OrderID = '" + orderDetailDTO.GetOrderID + "' and O.ProductID = P.ProductID";
             return Connection.SelectQuery(s);
         }
     }

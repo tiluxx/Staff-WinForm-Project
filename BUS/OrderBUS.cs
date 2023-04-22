@@ -45,6 +45,15 @@ namespace BUS
             orderDAL.UpdateOrderQuery();
         }
 
+        public void UpdateOrderStatusQuery()
+        {
+            orderDAL.UpdateOrderStatusQuery();
+        }
+        public void UpdateOrderPaymentStatusQuery(bool isPaid)
+        {
+            orderDAL.UpdateOrderPaymentStatusQuery(isPaid);
+        }
+
         public void DeleteOrderQuery()
         {
             orderDAL.DeleteOrderQuery();

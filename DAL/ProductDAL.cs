@@ -82,7 +82,7 @@ namespace DAL
         }
 
         // Get table in desc order
-        private DataTable GetProjectDesc()
+        private DataTable GetProductDesc()
         {
             string s = "select top 1 ProductID from Product order by ProductID desc";
             return Connection.SelectQuery(s);
@@ -90,7 +90,7 @@ namespace DAL
 
         public string GetNewProductID()
         {
-            DataTable resTable = GetProjectDesc();
+            DataTable resTable = GetProductDesc();
             if (resTable.Rows.Count > 0)
             {
                 string res = resTable.Rows[0][0].ToString();
@@ -112,10 +112,6 @@ namespace DAL
                     res = "MPVN00" + order.ToString();
                 }
                 else if (order < 100000)
-                {
-                    res = "MPVN00" + order.ToString();
-                }
-                else if (order < 1000000)
                 {
                     res = "MPVN0" + order.ToString();
                 }

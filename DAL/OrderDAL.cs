@@ -68,6 +68,32 @@ namespace DAL
             Connection.ActionQuery(query);
         }
 
+        public void UpdateOrderStatusQuery()
+        {
+            string query = "update _Order set" +
+                " OrderStatus = '" + orderDTO.GetOrderStatus +
+                "' where OrderID  = '" + orderDTO.GetOrderID + "'";
+            Connection.ActionQuery(query);
+        }
+
+        public void UpdateOrderPaymentStatusQuery(bool isPaid)
+        {
+            string query = "";
+            if (isPaid)
+            {
+                query = "update _Order set" +
+                    " OrderStatus = '" + orderDTO.GetOrderStatus +
+                    "', PaymentDate = '" + orderDTO.GetPaymentDate +
+                    "' where OrderID  = '" + orderDTO.GetOrderID + "'";
+            } else
+            {
+                query = "update _Order set" +
+                    " PaymentStatus = '" + orderDTO.GetPaymentStatus +
+                    "' where OrderID  = '" + orderDTO.GetOrderID + "'";
+            }
+            Connection.ActionQuery(query);
+        }
+
         public void DeleteOrderQuery()
         {
             string query = "delete from _Order where OrderID = '" + orderDTO.GetOrderID + "'";

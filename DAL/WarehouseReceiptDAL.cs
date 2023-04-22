@@ -66,9 +66,49 @@ namespace DAL
             return Connection.SelectQuery(s);
         }
 
+        private DataTable GetProjectDesc()
+        {
+            string s = "select top 1 WarehouseReceiptID from WarehouseReceipt order by WarehouseReceiptID desc";
+            return Connection.SelectQuery(s);
+        }
+
         public string GetNewWarehouseReceiptID()
         {
-            return "";
+            DataTable resTable = GetProjectDesc();
+            if (resTable.Rows.Count > 0)
+            {
+                string res = resTable.Rows[0][0].ToString();
+                int order = int.Parse(res.Substring(4)) + 1;
+                if (order < 10)
+                {
+                    res = "WHMP00000" + order.ToString();
+                }
+                else if (order < 100)
+                {
+                    res = "WHMP0000" + order.ToString();
+                }
+                else if (order < 1000)
+                {
+                    res = "WHMP000" + order.ToString();
+                }
+                else if (order < 10000)
+                {
+                    res = "WHMP00" + order.ToString();
+                }
+                else if (order < 100000)
+                {
+                    res = "WHMP0" + order.ToString();
+                }
+                else
+                {
+                    res = "WHMP" + order.ToString();
+                }
+                return res;
+            }
+            else
+            {
+                return "WHMP000001";
+            }
         }
     }
 }
