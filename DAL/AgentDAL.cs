@@ -68,9 +68,49 @@ namespace DAL
             return Connection.SelectQuery(s);
         }
 
+        private DataTable GetAgentDesc()
+        {
+            string s = "select top 1 AgentID from Agent order by AgentID desc";
+            return Connection.SelectQuery(s);
+        }
+
         public string GetNewAgentID()
         {
-            return "";
+            DataTable resTable = GetAgentDesc();
+            if (resTable.Rows.Count > 0)
+            {
+                string res = resTable.Rows[0][0].ToString();
+                int order = int.Parse(res.Substring(2)) + 1;
+                if (order < 10)
+                {
+                    res = "AG00000" + order.ToString();
+                }
+                else if (order < 100)
+                {
+                    res = "AG0000" + order.ToString();
+                }
+                else if (order < 1000)
+                {
+                    res = "AG000" + order.ToString();
+                }
+                else if (order < 10000)
+                {
+                    res = "AG00" + order.ToString();
+                }
+                else if (order < 100000)
+                {
+                    res = "AG0" + order.ToString();
+                }
+                else
+                {
+                    res = "AG" + order.ToString();
+                }
+                return res;
+            }
+            else
+            {
+                return "AG000001";
+            }
         }
     }
 }
