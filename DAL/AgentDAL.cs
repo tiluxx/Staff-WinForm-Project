@@ -35,7 +35,7 @@ namespace DAL
             {
                 isDeleted = 1;
             }
-            string query = "insert into Agent values ('" +
+            string query = "insert into _User values ('" +
                 agentDTO.GetAgentID +
                 "', '" + agentDTO.GetAgentName +
                 "', '" + agentDTO.GetAgentEmail +
@@ -43,28 +43,35 @@ namespace DAL
                 "', '" + agentDTO.GetAgentAddress +
                 "', " + isDeleted + ")";
             Connection.ActionQuery(query);
+
+            query = "insert into Agent values ('" + agentDTO.GetAgentID + "')";
+            Connection.ActionQuery(query);
         }
 
         public void UpdateAgentQuery()
         {
-            string query = "update Agent set" +
-                "', UserName = '" + agentDTO.GetAgentName +
+            string query = "update _User set" +
+                " UserName = '" + agentDTO.GetAgentName +
                 "', UserEmail = '" + agentDTO.GetAgentEmail +
-                "', UserPhoneNumber = '" + agentDTO.GetAgentPhoneNum +
+                "', UserPhone = '" + agentDTO.GetAgentPhoneNum +
                 "', UserAddress = '" + agentDTO.GetAgentAddress +
-                " where UserID = '" + agentDTO.GetAgentID + "'";
+                "' where UserID = '" + agentDTO.GetAgentID + "'";
             Connection.ActionQuery(query);
         }
 
         public void DeleteAgentQuery()
         {
-            string query = "delete from Agent where UserID = '" + agentDTO.GetAgentID + "'";
+            string query = "delete from Agent where AgentID = '" + agentDTO.GetAgentID + "'";
+            Connection.ActionQuery(query);
+
+            query = "delete from _User where UserID = '" + agentDTO.GetAgentID + "'";
             Connection.ActionQuery(query);
         }
 
         public DataTable SelectAgentQuery()
         {
-            string s = "select * from Agent";
+            string s = "select U.UserID as 'Agent ID', U.UserName as 'Agent name', U.UserEmail as 'Agent email', U.UserPhone as 'Agent phone', U.UserAddress as 'Agent address'" +
+                " from Agent A, _User U where A.AgentID = U.UserID";
             return Connection.SelectQuery(s);
         }
 
@@ -80,36 +87,36 @@ namespace DAL
             if (resTable.Rows.Count > 0)
             {
                 string res = resTable.Rows[0][0].ToString();
-                int order = int.Parse(res.Substring(2)) + 1;
+                int order = int.Parse(res.Substring(4)) + 1;
                 if (order < 10)
                 {
-                    res = "AG00000" + order.ToString();
+                    res = "AGMP00000" + order.ToString();
                 }
                 else if (order < 100)
                 {
-                    res = "AG0000" + order.ToString();
+                    res = "v0000" + order.ToString();
                 }
                 else if (order < 1000)
                 {
-                    res = "AG000" + order.ToString();
+                    res = "AGMP000" + order.ToString();
                 }
                 else if (order < 10000)
                 {
-                    res = "AG00" + order.ToString();
+                    res = "AGMP00" + order.ToString();
                 }
                 else if (order < 100000)
                 {
-                    res = "AG0" + order.ToString();
+                    res = "AGMP0" + order.ToString();
                 }
                 else
                 {
-                    res = "AG" + order.ToString();
+                    res = "AGMP" + order.ToString();
                 }
                 return res;
             }
             else
             {
-                return "AG000001";
+                return "AGMP000001";
             }
         }
     }

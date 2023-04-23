@@ -12,7 +12,7 @@ namespace DAL
     public class Connection
     {
         private static SqlConnection dbConn;
-        private static readonly String dbConnString = ConfigurationManager.ConnectionStrings["DBConn"].ConnectionString;
+        private static readonly string dbConnString = ConfigurationManager.ConnectionStrings["DBConn"].ConnectionString;
 
         public static void Connect()
         {

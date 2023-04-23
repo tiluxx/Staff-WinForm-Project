@@ -46,9 +46,9 @@ namespace BUS
             return agentAccountDAL.SelectAgentAcQuery();
         }
 
-        public string GetNewAgentAcID()
+        public DataTable SelectAgentAcByIDQuery(string agentID)
         {
-            return agentAccountDAL.GetNewAgentAcID();
+            return agentAccountDAL.SelectAgentAcByIDQuery(agentID);
         }
     }
 }

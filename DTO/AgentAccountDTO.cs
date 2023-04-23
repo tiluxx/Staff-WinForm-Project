@@ -8,18 +8,18 @@ namespace DTO
 {
     public class AgentAccountDTO
     {
-        private string agentAcID, agentAcName, agentAcPass;
+        private string agentID, agentAcName, agentAcPass;
         private bool agentAcDeleted, agentAcActivated;
 
-        public string GetAgentAcID
+        public string GetAgentID
         {
             get
             {
-                return agentAcID;
+                return agentID;
             }
             set
             {
-                agentAcID = value;
+                agentID = value;
             }
         }
 
@@ -72,13 +72,13 @@ namespace DTO
         }
 
         public AgentAccountDTO(
-            string AgentAcID,
+            string AgentID,
             string AgentAcName,
             string AgentAcPass,
             bool AgentAcActivated,
             bool AgentAcDeleted)
         {
-            this.agentAcID = AgentAcID;
+            this.agentID = AgentID;
             this.agentAcName = AgentAcName;
             this.agentAcPass = AgentAcPass;
             this.agentAcActivated = AgentAcActivated;

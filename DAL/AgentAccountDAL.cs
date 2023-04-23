@@ -12,14 +12,14 @@ namespace DAL
         private DTO.AgentAccountDTO agentAccountDTO;
 
         public AgentAccountDAL(
-            string AgentAcID,
+            string AgentID,
             string AgentAcName,
             string AgentAcEmail,
             bool AgentAcActivated,
             bool AgentAcDeleted)
         {
             agentAccountDTO = new DTO.AgentAccountDTO(
-                AgentAcID,
+                AgentID,
                 AgentAcName,
                 AgentAcEmail,
                 AgentAcActivated,
@@ -33,40 +33,61 @@ namespace DAL
             {
                 isDeleted = 1;
             }
-            string query = "insert into AgentAccount values ('" +
-                agentAccountDTO.GetAgentAcID +
-                "', '" + agentAccountDTO.GetAgentAcName +
+
+            int isActivated = 1;
+            if (!agentAccountDTO.CheckAgentAcActivated)
+            {
+                isActivated = 0;
+            }
+
+            string query = "insert into UserAccount values ('" +
+                agentAccountDTO.GetAgentAcName +
                 "', '" + agentAccountDTO.GetAgentAcPass +
-                "', '" + agentAccountDTO.CheckAgentAcActivated +
-                "', " + isDeleted + ")";
+                "', " + isActivated +
+                ", " + isDeleted + ")";
+            Connection.ActionQuery(query);
+
+            query = "insert into AgentAccount values ('" +
+                agentAccountDTO.GetAgentAcName +
+                "', '" + agentAccountDTO.GetAgentID + "')";
             Connection.ActionQuery(query);
         }
 
         public void UpdateAgentAcQuery()
         {
-            string query = "update AgentAccount set" +
-                "', UserName = '" + agentAccountDTO.GetAgentAcName +
-                "', UserPassword = '" + agentAccountDTO.GetAgentAcPass +
-                "', Activated = '" + agentAccountDTO.CheckAgentAcActivated +
-                " where UserID = '" + agentAccountDTO.GetAgentAcID + "'";
+            int isActivated = 1;
+            if (!agentAccountDTO.CheckAgentAcActivated)
+            {
+                isActivated = 0;
+            }
+            string query = "update UserAccount set" +
+                " UserPassword = '" + agentAccountDTO.GetAgentAcPass +
+                "', Activated = " + isActivated +
+                " where UserName = '" + agentAccountDTO.GetAgentAcName + "'";
             Connection.ActionQuery(query);
         }
 
         public void DeleteAgentAcQuery()
         {
-            string query = "delete from AgentAccount where UserID = '" + agentAccountDTO.GetAgentAcID + "'";
+            string query = "delete from AgentAccount where AgentACID = '" + agentAccountDTO.GetAgentAcName + "'";
+            Connection.ActionQuery(query);
+
+            query = "delete from UserAccount where UserName = '" + agentAccountDTO.GetAgentAcName + "'";
             Connection.ActionQuery(query);
         }
 
         public DataTable SelectAgentAcQuery()
         {
-            string s = "select * from AgentAccount";
+            string s = "select U.UserName as 'Agent username', U.Activated as 'Activation'" +
+                " from AgentAccount A, UserAccount U where A.AgentACID = U.UserName";
             return Connection.SelectQuery(s);
         }
 
-        public string GetNewAgentAcID()
+        public DataTable SelectAgentAcByIDQuery(string agentID)
         {
-            return "";
+            string s = "select U.UserName as 'Agent username', U.UserPassword as 'Agent password', U.Activated as 'Activation'" +
+                " from AgentAccount A, UserAccount U where A.AgentID = '" + agentID + "' and A.AgentACID = U.UserName";
+            return Connection.SelectQuery(s);
         }
     }
 }

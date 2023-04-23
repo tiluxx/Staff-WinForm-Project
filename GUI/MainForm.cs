@@ -19,7 +19,7 @@ namespace GUI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            StaffNameLabel.Text = GlobalVariable.UserID != null ? GlobalVariable.UserID : "User";
+            StaffNameLabel.Text = GlobalVariable.UserID ?? "User";
         }
 
         private void CreateWarehouseReceiptToolStripMenuItem_Click(object sender, EventArgs e)
@@ -66,15 +66,6 @@ namespace GUI
         private void VerticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(MdiLayout.TileVertical);
-        }
-
-        private void createDeliverySlipToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CreateWarehouseReceiptForm createWarehouseReceipt = new CreateWarehouseReceiptForm
-            {
-                MdiParent = this
-            };
-            createWarehouseReceipt.Show();
         }
     }
 }
