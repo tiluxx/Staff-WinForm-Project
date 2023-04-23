@@ -50,5 +50,30 @@ namespace BUS
         {
             return warehouseReceiptDAL.GetNewWarehouseReceiptID();
         }
+
+        public DataTable GetImportProductByMonth(int month)
+        {
+            return warehouseReceiptDAL.GetImportProductByMonth(month);
+        }
+
+        public DataTable GetExportProductByMonth(int month)
+        {
+            return warehouseReceiptDAL.GetExportProductByMonth(month);
+        }
+
+        public DataTable GetBestSellingProduct(int month)
+        {
+            return warehouseReceiptDAL.GetBestSellingProduct(month);
+        }
+
+        public DataTable GetRevenueByMonth(int month)
+        {
+            return warehouseReceiptDAL.GetRevenueByMonth(month);
+        }
+
+        public DataTable GetRevenueMonthly()
+        {
+            return warehouseReceiptDAL.GetRevenueMonthly();
+        }
     }
 }

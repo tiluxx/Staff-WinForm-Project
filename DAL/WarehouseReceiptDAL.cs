@@ -110,5 +110,56 @@ namespace DAL
                 return "WHMP000001";
             }
         }
+
+        public DataTable GetImportProductByMonth(int month)
+        {
+            string s = "select P.ProductID, P.ProductName, P.ProductSize, P.ProductUnitSize, P.ProductBrand, P.ProductOrigin, P.ProductPrice, WD.Quantity" +
+                        " from WareHouseReceiptDetail WD, Product P" +
+                        " where WD.WareHouseReceiptID IN(" +
+                            " select W.WarehouseReceiptID" +
+                            " from WareHouseReceipt W" +
+                            " where Month(W.ImportDate) = " + month +
+                        " ) and WD.ProductID = P.ProductID";
+            return Connection.SelectQuery(s);
+        }
+
+        public DataTable GetExportProductByMonth(int month)
+        {
+            string s = "select P.ProductID, P.ProductName, P.ProductSize, P.ProductUnitSize, P.ProductBrand, P.ProductOrigin, P.ProductPrice, O.Quantity" +
+                        " from OrderDetail O, Product P" +
+                        " where O.OrderID IN (" +
+                            " select D.OrderID" +
+                            " from DeliverySlip D" +
+                            " where Month(D.DeliveryDate) = " + month +
+                        " ) and O.ProductID = P.ProductID";
+            return Connection.SelectQuery(s);
+        }
+
+        public DataTable GetBestSellingProduct(int month)
+        {
+            string s = "select top(3) P.ProductID, P.ProductName, P.ProductSize, P.ProductUnitSize, P.ProductBrand, P.ProductOrigin, P.ProductPrice, SUM(O.Quantity) AS TotalQuantity" +
+                        " from OrderDetail O, Product P" +
+                        " where O.OrderID IN ( select D.OrderID from DeliverySlip D where Month(D.DeliveryDate) = " + month + " ) and O.ProductID = P.ProductID" +
+                        " group by P.ProductID, P.ProductName, P.ProductSize, P.ProductUnitSize, P.ProductBrand, P.ProductOrigin, P.ProductPrice" +
+                        " order by SUM(O.Quantity) DESC";
+            return Connection.SelectQuery(s);
+        }
+
+        public DataTable GetRevenueByMonth(int month)
+        {
+            string s = "select M.MonthName AS 'Month', SUM(D.TotalBill) AS 'Revenue'" +
+                       " from DeliverySlip D, __Months M" +
+                       " where Month(D.DeliveryDate) = " + month + " and Month(D.DeliveryDate) = M.MonthNumber" +
+                       " group by M.MonthName";
+            return Connection.SelectQuery(s);
+        }
+
+        public DataTable GetRevenueMonthly()
+        {
+            string s = "select M.MonthName AS 'Month', ISNULL(SUM(D.TotalBill), 0) AS 'Revenue'" +
+                       " from __Months M LEFT JOIN DeliverySlip D ON Month(D.DeliveryDate) = M.MonthNumber" +
+                       " group by M.MonthName";
+            return Connection.SelectQuery(s);
+        }
     }
 }
