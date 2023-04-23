@@ -33,7 +33,11 @@ namespace GUI
 
         private void AgentManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            CreateAgentForm createAgentForm = new CreateAgentForm
+            {
+                MdiParent = this
+            };
+            createAgentForm.Show();
         }
 
         private void ReportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -52,11 +56,6 @@ namespace GUI
                 MdiParent = this
             };
             createDeliverySlipForm.Show();
-        }
-
-        private void ViewOrdersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void HorizontalToolStripMenuItem_Click(object sender, EventArgs e)

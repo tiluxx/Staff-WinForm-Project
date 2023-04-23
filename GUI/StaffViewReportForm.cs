@@ -66,32 +66,36 @@ namespace GUI
 
         private void viewReportBtn_Click(object sender, EventArgs e)
         {
-            DataTable res = new DataTable();
+            if (RevenueMonthlyReportOption.Checked)
+            {
+                ReportGrd.DataSource = warehouseReceiptBUS.GetRevenueMonthly();
+                return;
+            }
 
+            if (MonthOptionCB.SelectedItem == null)
+            {
+                MessageBox.Show("Please choose a month to view report", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int selectedMonth = GetActualMonthNumber(MonthOptionCB.SelectedItem.ToString());
+            DataTable res = new DataTable();
             
             if (GoodsImportReportOption.Checked)
             {
-                int selectedMonth = GetActualMonthNumber(MonthOptionCB.SelectedItem.ToString());
                 res = warehouseReceiptBUS.GetImportProductByMonth(selectedMonth);
             }
             else if (GoodsExportReportOption.Checked)
             {
-                int selectedMonth = GetActualMonthNumber(MonthOptionCB.SelectedItem.ToString());
                 res = warehouseReceiptBUS.GetExportProductByMonth(selectedMonth);
             }
             else if (BestSellingProductReportOption.Checked)
             {
-                int selectedMonth = GetActualMonthNumber(MonthOptionCB.SelectedItem.ToString());
                 res = warehouseReceiptBUS.GetBestSellingProduct(selectedMonth);
             }
             else if (RevenueByMonthReportOption.Checked)
             {
-                int selectedMonth = GetActualMonthNumber(MonthOptionCB.SelectedItem.ToString());
                 res = warehouseReceiptBUS.GetRevenueByMonth(selectedMonth);
-            }
-            else if (RevenueMonthlyReportOption.Checked)
-            {
-                res = warehouseReceiptBUS.GetRevenueMonthly();
             }
 
             ReportGrd.DataSource = res;
