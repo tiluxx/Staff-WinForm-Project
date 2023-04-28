@@ -30,6 +30,13 @@ namespace GUI
             {
                 MonthOptionCB.Items.Add(dateTimeFormat.GetMonthName(i));
             }
+
+            // Get all year
+            int currYear = DateTime.Now.Year;
+            for (int i = currYear; i >= 1900; i--)
+            {
+                YearOptionCB.Items.Add(i.ToString());
+            }
         }
 
         private int GetActualMonthNumber(string monthName)
@@ -79,23 +86,24 @@ namespace GUI
             }
 
             int selectedMonth = GetActualMonthNumber(MonthOptionCB.SelectedItem.ToString());
+            int selectedYear = Convert.ToInt32(YearOptionCB.SelectedItem.ToString());
             DataTable res = new DataTable();
             
             if (GoodsImportReportOption.Checked)
             {
-                res = warehouseReceiptBUS.GetImportProductByMonth(selectedMonth);
+                res = warehouseReceiptBUS.GetImportProductByMonth(selectedMonth, selectedYear);
             }
             else if (GoodsExportReportOption.Checked)
             {
-                res = warehouseReceiptBUS.GetExportProductByMonth(selectedMonth);
+                res = warehouseReceiptBUS.GetExportProductByMonth(selectedMonth, selectedYear);
             }
             else if (BestSellingProductReportOption.Checked)
             {
-                res = warehouseReceiptBUS.GetBestSellingProduct(selectedMonth);
+                res = warehouseReceiptBUS.GetBestSellingProduct(selectedMonth, selectedYear);
             }
             else if (RevenueByMonthReportOption.Checked)
             {
-                res = warehouseReceiptBUS.GetRevenueByMonth(selectedMonth);
+                res = warehouseReceiptBUS.GetRevenueByMonth(selectedMonth, selectedYear);
             }
 
             ReportGrd.DataSource = res;
@@ -106,6 +114,7 @@ namespace GUI
             if (RevenueMonthlyReportOption.Checked)
             {
                 MonthOptionCB.Enabled = false;
+                YearOptionCB.Enabled = false;
             }
         }
 
@@ -114,6 +123,7 @@ namespace GUI
             if (GoodsImportReportOption.Checked)
             {
                 MonthOptionCB.Enabled = true;
+                YearOptionCB.Enabled = true;
             }
         }
 
@@ -122,6 +132,7 @@ namespace GUI
             if (GoodsExportReportOption.Checked)
             {
                 MonthOptionCB.Enabled = true;
+                YearOptionCB.Enabled = true;
             }
         }
 
@@ -130,6 +141,7 @@ namespace GUI
             if (BestSellingProductReportOption.Checked)
             {
                 MonthOptionCB.Enabled = true;
+                YearOptionCB.Enabled = true;
             }
         }
 
@@ -138,6 +150,7 @@ namespace GUI
             if (RevenueByMonthReportOption.Checked)
             {
                 MonthOptionCB.Enabled = true;
+                YearOptionCB.Enabled = true;
             }
         }
     }

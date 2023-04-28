@@ -67,9 +67,49 @@ namespace DAL
             return Connection.SelectQuery(s);
         }
 
+        private DataTable GetDeliverySlipDesc()
+        {
+            string s = "select top 1 SlipID from DeliverySlip order by SlipID desc";
+            return Connection.SelectQuery(s);
+        }
+
         public string GetNewDeliverySlipID()
         {
-            return "";
+            DataTable resTable = GetDeliverySlipDesc();
+            if (resTable.Rows.Count > 0)
+            {
+                string res = resTable.Rows[0][0].ToString();
+                int order = int.Parse(res.Substring(4)) + 1;
+                if (order < 10)
+                {
+                    res = "DSMP00000" + order.ToString();
+                }
+                else if (order < 100)
+                {
+                    res = "DSMP0000" + order.ToString();
+                }
+                else if (order < 1000)
+                {
+                    res = "DSMP000" + order.ToString();
+                }
+                else if (order < 10000)
+                {
+                    res = "DSMP00" + order.ToString();
+                }
+                else if (order < 100000)
+                {
+                    res = "DSMP0" + order.ToString();
+                }
+                else
+                {
+                    res = "DSMP" + order.ToString();
+                }
+                return res;
+            }
+            else
+            {
+                return "DSMP000001";
+            }
         }
     }
 }

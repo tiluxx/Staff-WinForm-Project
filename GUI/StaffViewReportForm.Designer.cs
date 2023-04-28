@@ -30,6 +30,7 @@ namespace GUI
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.RevenueMonthlyReportOption = new System.Windows.Forms.RadioButton();
             this.RevenueByMonthReportOption = new System.Windows.Forms.RadioButton();
             this.BestSellingProductReportOption = new System.Windows.Forms.RadioButton();
             this.GoodsExportReportOption = new System.Windows.Forms.RadioButton();
@@ -40,7 +41,8 @@ namespace GUI
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.ReportGrd = new System.Windows.Forms.DataGridView();
-            this.RevenueMonthlyReportOption = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.YearOptionCB = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -60,6 +62,18 @@ namespace GUI
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Report options";
+            // 
+            // RevenueMonthlyReportOption
+            // 
+            this.RevenueMonthlyReportOption.AutoSize = true;
+            this.RevenueMonthlyReportOption.Location = new System.Drawing.Point(476, 21);
+            this.RevenueMonthlyReportOption.Name = "RevenueMonthlyReportOption";
+            this.RevenueMonthlyReportOption.Size = new System.Drawing.Size(181, 21);
+            this.RevenueMonthlyReportOption.TabIndex = 4;
+            this.RevenueMonthlyReportOption.TabStop = true;
+            this.RevenueMonthlyReportOption.Text = "Revenue report monthly";
+            this.RevenueMonthlyReportOption.UseVisualStyleBackColor = true;
+            this.RevenueMonthlyReportOption.CheckedChanged += new System.EventHandler(this.RevenueMonthlyReportOption_CheckedChanged);
             // 
             // RevenueByMonthReportOption
             // 
@@ -111,6 +125,8 @@ namespace GUI
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.YearOptionCB);
+            this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.viewReportBtn);
             this.groupBox2.Controls.Add(this.MonthOptionCB);
             this.groupBox2.Controls.Add(this.label2);
@@ -119,13 +135,13 @@ namespace GUI
             this.groupBox2.Size = new System.Drawing.Size(776, 60);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Report options";
+            this.groupBox2.Text = "Report time";
             // 
             // viewReportBtn
             // 
-            this.viewReportBtn.Location = new System.Drawing.Point(512, 21);
+            this.viewReportBtn.Location = new System.Drawing.Point(627, 21);
             this.viewReportBtn.Name = "viewReportBtn";
-            this.viewReportBtn.Size = new System.Drawing.Size(115, 24);
+            this.viewReportBtn.Size = new System.Drawing.Size(143, 24);
             this.viewReportBtn.TabIndex = 6;
             this.viewReportBtn.Text = "View report";
             this.viewReportBtn.UseVisualStyleBackColor = true;
@@ -134,15 +150,15 @@ namespace GUI
             // MonthOptionCB
             // 
             this.MonthOptionCB.FormattingEnabled = true;
-            this.MonthOptionCB.Location = new System.Drawing.Point(251, 21);
+            this.MonthOptionCB.Location = new System.Drawing.Point(149, 21);
             this.MonthOptionCB.Name = "MonthOptionCB";
-            this.MonthOptionCB.Size = new System.Drawing.Size(255, 24);
+            this.MonthOptionCB.Size = new System.Drawing.Size(162, 24);
             this.MonthOptionCB.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(108, 24);
+            this.label2.Location = new System.Drawing.Point(6, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(137, 17);
             this.label2.TabIndex = 4;
@@ -168,17 +184,22 @@ namespace GUI
             this.ReportGrd.Size = new System.Drawing.Size(764, 302);
             this.ReportGrd.TabIndex = 0;
             // 
-            // RevenueMonthlyReportOption
+            // label1
             // 
-            this.RevenueMonthlyReportOption.AutoSize = true;
-            this.RevenueMonthlyReportOption.Location = new System.Drawing.Point(476, 21);
-            this.RevenueMonthlyReportOption.Name = "RevenueMonthlyReportOption";
-            this.RevenueMonthlyReportOption.Size = new System.Drawing.Size(181, 21);
-            this.RevenueMonthlyReportOption.TabIndex = 4;
-            this.RevenueMonthlyReportOption.TabStop = true;
-            this.RevenueMonthlyReportOption.Text = "Revenue report monthly";
-            this.RevenueMonthlyReportOption.UseVisualStyleBackColor = true;
-            this.RevenueMonthlyReportOption.CheckedChanged += new System.EventHandler(this.RevenueMonthlyReportOption_CheckedChanged);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(317, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(126, 17);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Select year to view";
+            // 
+            // YearOptionCB
+            // 
+            this.YearOptionCB.FormattingEnabled = true;
+            this.YearOptionCB.Location = new System.Drawing.Point(449, 21);
+            this.YearOptionCB.Name = "YearOptionCB";
+            this.YearOptionCB.Size = new System.Drawing.Size(172, 24);
+            this.YearOptionCB.TabIndex = 8;
             // 
             // StaffViewReportForm
             // 
@@ -215,5 +236,7 @@ namespace GUI
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView ReportGrd;
         private System.Windows.Forms.RadioButton RevenueMonthlyReportOption;
+        private System.Windows.Forms.ComboBox YearOptionCB;
+        private System.Windows.Forms.Label label1;
     }
 }

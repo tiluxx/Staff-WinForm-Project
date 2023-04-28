@@ -51,24 +51,24 @@ namespace BUS
             return warehouseReceiptDAL.GetNewWarehouseReceiptID();
         }
 
-        public DataTable GetImportProductByMonth(int month)
+        public DataTable GetImportProductByMonth(int month, int year)
         {
-            return warehouseReceiptDAL.GetImportProductByMonth(month);
+            return warehouseReceiptDAL.GetImportProductByMonth(month, year);
         }
 
-        public DataTable GetExportProductByMonth(int month)
+        public DataTable GetExportProductByMonth(int month, int year)
         {
-            return warehouseReceiptDAL.GetExportProductByMonth(month);
+            return warehouseReceiptDAL.GetExportProductByMonth(month, year);
         }
 
-        public DataTable GetBestSellingProduct(int month)
+        public DataTable GetBestSellingProduct(int month, int year)
         {
-            return warehouseReceiptDAL.GetBestSellingProduct(month);
+            return warehouseReceiptDAL.GetBestSellingProduct(month, year);
         }
 
-        public DataTable GetRevenueByMonth(int month)
+        public DataTable GetRevenueByMonth(int month, int year)
         {
-            return warehouseReceiptDAL.GetRevenueByMonth(month);
+            return warehouseReceiptDAL.GetRevenueByMonth(month, year);
         }
 
         public DataTable GetRevenueMonthly()

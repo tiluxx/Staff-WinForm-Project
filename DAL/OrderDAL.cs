@@ -78,11 +78,11 @@ namespace DAL
 
         public void UpdateOrderPaymentStatusQuery(bool isPaid)
         {
-            string query = "";
+            string query;
             if (isPaid)
             {
                 query = "update _Order set" +
-                    " OrderStatus = '" + orderDTO.GetOrderStatus +
+                    " PaymentStatus = '" + orderDTO.GetPaymentStatus +
                     "', PaymentDate = '" + orderDTO.GetPaymentDate +
                     "' where OrderID  = '" + orderDTO.GetOrderID + "'";
             } else
