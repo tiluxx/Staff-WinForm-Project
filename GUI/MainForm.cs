@@ -67,5 +67,13 @@ namespace GUI
         {
             this.LayoutMdi(MdiLayout.TileVertical);
         }
+
+        private void LogoutBtn_Click(object sender, EventArgs e)
+        {
+            GlobalVariable.UserID = "";
+            LoginStaffForm loginForm = new LoginStaffForm();
+            loginForm.Show();
+            this.Hide();
+        }
     }
 }

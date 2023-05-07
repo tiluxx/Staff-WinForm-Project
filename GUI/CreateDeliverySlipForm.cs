@@ -155,8 +155,8 @@ namespace GUI
             OrderStatusCB.Text = currentRow.Cells[3].Value.ToString();
             PaymentStatusCB.Text = currentRow.Cells[4].Value.ToString();
             PaymentDateTxt.Text = currentRow.Cells[5].Value.ToString();
-            PaymentMethodCB.Text = currentRow.Cells[6].Value.ToString();
-            TotalBillInput.Value = Convert.ToDecimal(currentRow.Cells[7].Value.ToString());
+            PaymentMethodCB.Text = currentRow.Cells[7].Value.ToString();
+            TotalBillInput.Value = Convert.ToDecimal(currentRow.Cells[8].Value.ToString());
 
             // Update current state of order and payment status
             currOrderStatus = currentRow.Cells[3].Value.ToString();

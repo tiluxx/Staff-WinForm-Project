@@ -41,16 +41,15 @@ namespace DAL
             {
                 isDeleted = 1;
             }
-            string query = "insert into _Order values ('" +
+            string query = "insert into _Order (OrderID, OrderDate, AgentID, OrderStatus, PaymentStatus, PaymentMethod, OrderProductTotalBill, OrderDeleted) values ('" +
                 orderDTO.GetOrderID +
+                "', '" + orderDTO.GetOrderDate +
                 "', '" + orderDTO.GetAgentID +
                 "', '" + orderDTO.GetOrderStatus +
                 "', '" + orderDTO.GetPaymentStatus +
                 "', '" + orderDTO.GetPaymentMethod +
-                "', '" + orderDTO.GetTotalBill +
-                "', " + orderDTO.GetOrderDate +
-                "', " + orderDTO.GetPaymentDate +
-                "', " + isDeleted + ")";
+                "', " + orderDTO.GetTotalBill +
+                ", " + isDeleted + ")";
             Connection.ActionQuery(query);
         }
 

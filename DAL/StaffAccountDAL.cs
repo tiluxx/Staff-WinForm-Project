@@ -67,8 +67,8 @@ namespace DAL
 
         public List<String> CheckStaffLogin(string username, string password)
         {
-            string s = "select U.UserID from _User U, UserAccount UA" +
-                    " where (U.UserID = '" + username + "' or UA.UserName = '" + username + "')" +
+            string s = "select U.UserID from _User U, UserAccount UA, StaffAccount S" +
+                    " where (S.StaffID = '" + username + "' or UA.UserName = '" + username + "')  and UA.UserName = S.StaffACID and S.StaffID = U.UserID" +
                     " and UA.UserPassword = '" + password + "'";
             DataTable resQuery = Connection.SelectQuery(s);
 

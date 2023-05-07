@@ -119,7 +119,7 @@ namespace DAL
                             " select W.WarehouseReceiptID" +
                             " from WareHouseReceipt W" +
                             " where Month(W.ImportDate) = " + month +
-                            " and Month(W.ImportDate) = " + year +
+                            " and Year(W.ImportDate) = " + year +
                         " ) and WD.ProductID = P.ProductID";
             return Connection.SelectQuery(s);
         }
@@ -132,7 +132,7 @@ namespace DAL
                             " select D.OrderID" +
                             " from DeliverySlip D" +
                             " where Month(D.DeliveryDate) = " + month +
-                            " and Month(D.DeliveryDate) = " + year +
+                            " and Year(D.DeliveryDate) = " + year +
                         " ) and O.ProductID = P.ProductID";
             return Connection.SelectQuery(s);
         }

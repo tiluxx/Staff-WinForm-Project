@@ -102,7 +102,7 @@ namespace GUI
             // orderManagementToolStripMenuItem
             // 
             this.orderManagementToolStripMenuItem.Name = "orderManagementToolStripMenuItem";
-            this.orderManagementToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.orderManagementToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
             this.orderManagementToolStripMenuItem.Text = "Order Management";
             this.orderManagementToolStripMenuItem.Click += new System.EventHandler(this.OrderManagementToolStripMenuItem_Click);
             // 
@@ -157,6 +157,7 @@ namespace GUI
             this.LogoutBtn.TabIndex = 5;
             this.LogoutBtn.Text = "Logout";
             this.LogoutBtn.UseVisualStyleBackColor = true;
+            this.LogoutBtn.Click += new System.EventHandler(this.LogoutBtn_Click);
             // 
             // MainForm
             // 

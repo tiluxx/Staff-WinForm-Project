@@ -94,7 +94,7 @@ namespace DAL
                 }
                 else if (order < 100)
                 {
-                    res = "v0000" + order.ToString();
+                    res = "AGMP0000" + order.ToString();
                 }
                 else if (order < 1000)
                 {
