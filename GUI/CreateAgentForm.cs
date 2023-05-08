@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -176,6 +178,25 @@ namespace GUI
 
                 agentAccountBUS = new BUS.AgentAccountBUS(newAgentID, AccountUserNameTxt.Text, AccountPasswordTxt.Text, isActivated, false);
                 agentAccountBUS.AddAgentAcQuery();
+
+                string distributorEmail = "lethanhtienhqv@gmail.com";
+
+                MailMessage createAccountMail = new MailMessage();
+                createAccountMail.To.Add(agentEmail);
+                createAccountMail.From = new MailAddress(distributorEmail);
+                createAccountMail.Subject = "Your Agent Account";
+                createAccountMail.Body = "Dear Customer,<br /><br />This is your agent account to access our distributor system: <br />Username: <strong>" + AccountUserNameTxt.Text + "</strong><br />Password: <strong>" + AccountPasswordTxt.Text + "</strong><br /><br />Sincerely,<br />Distributor";
+                createAccountMail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(distributorEmail, "nhqpbctsxsoqfdxi"),
+                    EnableSsl = true
+                };
+                smtp.Send(createAccountMail);
+                MessageBox.Show("A mail is sent to our new agent", "Info");
             }
             else if (btnType == 2)
             {

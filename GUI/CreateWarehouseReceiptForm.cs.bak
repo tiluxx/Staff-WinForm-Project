@@ -299,13 +299,12 @@ namespace GUI
                     }
                     string productID = row.Cells[0].Value.ToString();
                     int productQuanNum = Convert.ToInt32(row.Cells[6].Value.ToString());
-					decimal productPrice = Convert.ToDecimal(row.Cells[7].Value.ToString());
+					int productPrice = Convert.ToDecimal(row.Cells[6].Value.ToString());
 					totalBill += productQuanNum * productPrice;
                     warehouseReceiptDetailBUS = new BUS.WarehouseReceiptDetailBUS(warehouseReceiptID, productID, productQuanNum);
                     warehouseReceiptDetailBUS.AddWarehouseReceiptDetailQuery();
                 }
 				warehouseReceiptBUS = new BUS.WarehouseReceiptBUS(warehouseReceiptID, staffID, createdDate, false, totalBill);
-				warehouseReceiptBUS.UpdateWarehouseReceiptQuery();
 				
                 ReceiptGrd.DataSource = warehouseReceiptBUS.SelectWarehouseReceiptQuery();
 
