@@ -185,7 +185,7 @@ namespace GUI
                 createAccountMail.To.Add(agentEmail);
                 createAccountMail.From = new MailAddress(distributorEmail);
                 createAccountMail.Subject = "Your Agent Account";
-                createAccountMail.Body = "Dear Customer,<br /><br />This is your agent account to access our distributor system: <br />Username: <strong>" + AccountUserNameTxt.Text + "</strong><br />Password: <strong>" + AccountPasswordTxt.Text + "</strong><br /><br />Sincerely,<br />Distributor";
+                createAccountMail.Body = "Dear Customer,<br /><br />This is your agent account to access our distributor system: <br />AgentID: <strong>" + newAgentID + "</strong><br />Username: <strong>" + AccountUserNameTxt.Text + "</strong><br />Password: <strong>" + AccountPasswordTxt.Text + "</strong><br /><br />Sincerely,<br />Distributor";
                 createAccountMail.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient
                 {
@@ -255,7 +255,6 @@ namespace GUI
             AddBtn.Enabled = false;
             EditBtn.Enabled = true;
             SaveBtn.Enabled = false;
-            
         }
     }
 }
