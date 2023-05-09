@@ -66,15 +66,16 @@ namespace DAL
             return Connection.SelectQuery(s);
         }
 
-        private DataTable GetProjectDesc()
+        private DataTable GetWarehouseReceiptDesc()
         {
-            string s = "select top 1 WarehouseReceiptID from WarehouseReceipt order by WarehouseReceiptID desc";
+            string s = "select top 1 WarehouseReceiptID from WarehouseReceipt" +
+                " order by WarehouseReceiptID desc";
             return Connection.SelectQuery(s);
         }
 
         public string GetNewWarehouseReceiptID()
         {
-            DataTable resTable = GetProjectDesc();
+            DataTable resTable = GetWarehouseReceiptDesc();
             if (resTable.Rows.Count > 0)
             {
                 string res = resTable.Rows[0][0].ToString();
@@ -113,7 +114,8 @@ namespace DAL
 
         public DataTable GetImportProductByMonth(int month, int year)
         {
-            string s = "select P.ProductID, P.ProductName, P.ProductSize, P.ProductUnitSize, P.ProductBrand, P.ProductOrigin, P.ProductPrice, WD.Quantity" +
+            string s = "select P.ProductID, P.ProductName, P.ProductSize," +
+                        " P.ProductUnitSize, P.ProductBrand, P.ProductOrigin, P.ProductPrice, WD.Quantity" +
                         " from WareHouseReceiptDetail WD, Product P" +
                         " where WD.WareHouseReceiptID IN(" +
                             " select W.WarehouseReceiptID" +
@@ -126,7 +128,8 @@ namespace DAL
 
         public DataTable GetExportProductByMonth(int month, int year)
         {
-            string s = "select P.ProductID, P.ProductName, P.ProductSize, P.ProductUnitSize, P.ProductBrand, P.ProductOrigin, P.ProductPrice, O.Quantity" +
+            string s = "select P.ProductID, P.ProductName, P.ProductSize, P.ProductUnitSize," +
+                        " P.ProductBrand, P.ProductOrigin, P.ProductPrice, O.Quantity" +
                         " from OrderDetail O, Product P" +
                         " where O.OrderID IN (" +
                             " select D.OrderID" +
@@ -139,9 +142,12 @@ namespace DAL
 
         public DataTable GetBestSellingProduct(int month, int year)
         {
-            string s = "select top(3) P.ProductID, P.ProductName, P.ProductSize, P.ProductUnitSize, P.ProductBrand, P.ProductOrigin, P.ProductPrice, SUM(O.Quantity) AS TotalQuantity" +
+            string s = "select top(3) P.ProductID, P.ProductName, P.ProductSize," +
+                        " P.ProductUnitSize, P.ProductBrand, P.ProductOrigin, P.ProductPrice, SUM(O.Quantity) AS TotalQuantity" +
                         " from OrderDetail O, Product P" +
-                        " where O.OrderID IN ( select D.OrderID from DeliverySlip D where Month(D.DeliveryDate) = " + month + " and Year(D.DeliveryDate) = " + year + ") and O.ProductID = P.ProductID" +
+                        " where O.OrderID IN ( select D.OrderID from DeliverySlip D" +
+                        " where Month(D.DeliveryDate) = " + month + " and Year(D.DeliveryDate) = " + year + ")" +
+                        " and O.ProductID = P.ProductID" +
                         " group by P.ProductID, P.ProductName, P.ProductSize, P.ProductUnitSize, P.ProductBrand, P.ProductOrigin, P.ProductPrice" +
                         " order by SUM(O.Quantity) DESC";
             return Connection.SelectQuery(s);
