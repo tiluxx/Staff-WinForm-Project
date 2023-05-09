@@ -49,7 +49,7 @@ namespace DAL
             string query = "update WarehouseReceipt set" +
                 " StaffID = '" + warehouseReceiptDTO.GetStaffID +
                 "', ImportDate = '" + importDate +
-                "', TotalBill = " + warehouseReceiptDTO.GetWarehouseReceiptTotalBill +
+                "', WarehouseTotalBill = " + warehouseReceiptDTO.GetWarehouseReceiptTotalBill +
                 " where WarehouseReceiptID = '" + warehouseReceiptDTO.GetWarehouseReceiptID + "'";
             Connection.ActionQuery(query);
         }
